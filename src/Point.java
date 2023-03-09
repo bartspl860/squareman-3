@@ -1,8 +1,8 @@
 public class Point {
-    public double x;
-    public double y;
+    public Integer x;
+    public Integer y;
 
-    public Point(double x, double y) {
+    public Point(Integer x, Integer y) {
         this.x = x;
         this.y = y;
     }
@@ -12,7 +12,7 @@ public class Point {
         this.y = loc.y;
     }
 
-    public Point Add(Double m) {
+    public Point Add(Integer m) {
         return new Point(this.x + m, this.y + m);
     }
 
@@ -20,7 +20,7 @@ public class Point {
         return new Point(this.x + m.x, this.y + m.y);
     }
 
-    public Point Multiply(Double m) {
+    public Point Multiply(Integer m) {
         return new Point(this.x * m, this.y * m);
     }
 
@@ -29,8 +29,7 @@ public class Point {
     }
 
     @Override
-    public String toString() {
-        // TODO Auto-generated method stub
+    public String toString() {        
         return "x: " + x + " y: " + y;
     }
 }

@@ -1,6 +1,7 @@
 public abstract class GameObject {
     private static Long InstanceCounter = 0L;
     private Long _id;
+    private String _tag = null;
 
     protected Point _position;
     protected Integer _width;
@@ -17,6 +18,14 @@ public abstract class GameObject {
         return this._id;
     }
 
+    public void SetTag(String tag){
+        this._tag = tag;
+    }
+
+    public String GetTag(){
+        return this._tag;
+    }
+    
     public Point GetCenter() {
         Point center = new Point(
                 this._position.x + this._width / 2,
@@ -51,7 +60,7 @@ public abstract class GameObject {
         this._height += (int)size.y;
     }
 
-    public Boolean IsColliding(GameObject obj) {
+    public Boolean IsCollidingRect(GameObject obj) {
         Boolean collision_detected = this._position.x < obj._position.x + obj._width &&
                 this._position.y < obj._position.y + obj._height &&
                 this._position.x + this._width > obj._position.x &&
@@ -59,7 +68,7 @@ public abstract class GameObject {
         return collision_detected;
     }
 
-    public void ResolveCollision(GameObject obj) {
+    public void ResolveCollisionRect(GameObject obj) {
         double vector_x, vector_y;
 
         // get the distance between center points
@@ -94,5 +103,8 @@ public abstract class GameObject {
         }
     }
     
+    public MobileGameObject ToMobileGameObject(){
+        return (MobileGameObject)this;
+    }
 }
 
