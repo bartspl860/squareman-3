@@ -18,7 +18,9 @@ public class App extends JFrame {
         setSize(WIN_DIM, WIN_DIM);
         setLocationRelativeTo(null); // center window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        addKeyListener(new TAdapter());
+        var tAdapter = new TAdapter();
+        addKeyListener(tAdapter);
+        addMouseListener(tAdapter);
     }
 
     public static void main(String[] args) throws IOException {

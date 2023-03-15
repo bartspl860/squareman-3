@@ -1,5 +1,6 @@
 import java.awt.Graphics2D;
 
 public interface IColorable {
-    void Draw(Graphics2D g2d);
+    void DrawRect(Graphics2D g2d);
+    void FillRect(Graphics2D g2d);
 }

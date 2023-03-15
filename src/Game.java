@@ -8,45 +8,58 @@ import java.awt.event.ActionListener;
 
 public class Game extends JPanel implements ActionListener {
     private static Game _game = null;
-    public static Game Instance(){
-        if(_game == null)
+
+    public static Game Instance() {
+        if (_game == null)
             _game = new Game();
         return _game;
     }
-    public Dimension size;
+
+    public final static ArrayList<GameObject> Objects = new ArrayList<>();
+
+    private GameState _state = new GameStatePlay();
+
+    // private Point _cursor_position
 
     protected Game() {
         Objects.add(Player.Instance());
         new Timer(10, this).start();
     }
 
-    public void SetSize(int width, int height){
-        this.size = new Dimension(width, height);
-    }
-
-    public final static ArrayList<GameObject> Objects = new ArrayList<>();
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        var g2d = (Graphics2D)g;
-        
-        Toolkit.getDefaultToolkit().sync();        
+        var g2d = (Graphics2D) g;
+
+        Toolkit.getDefaultToolkit().sync();
 
         for (GameObject gobj : Objects) {
-            if(gobj instanceof IColorable){
-                ((IColorable)gobj).Draw(g2d);
+            if (gobj instanceof IColorable) {
+                ((IColorable) gobj).DrawRect(g2d);                
+            }
+        }
+        for (GameObject gobj : Objects) {
+            if (gobj instanceof IColorable) {
+                ((IColorable) gobj).FillRect(g2d);                
             }
         }
         repaint();
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {        
-        for (GameObject gobj : Objects) {
-            if(gobj instanceof MobileGameObject){
-                ((MobileGameObject)gobj).Move();
-            }
-        }
+    public void actionPerformed(ActionEvent e) {
+        _state.main();
+    }
+
+    public GameState get_state() {
+        return _state;
+    }
+
+    public void set_state(GameState _state) {
+        this._state = _state;
+    }
+
+    public static ArrayList<GameObject> getObjects() {
+        return Objects;
     }
 }

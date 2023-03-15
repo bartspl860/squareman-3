@@ -103,8 +103,8 @@ public abstract class GameObject {
         }
     }
     
-    public MobileGameObject ToMobileGameObject(){
-        return (MobileGameObject)this;
+    public static MobileGameObject AsMobileGameObject(GameObject go){
+        return (MobileGameObject)go;
     }
 }
 
