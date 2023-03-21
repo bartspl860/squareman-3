@@ -15,28 +15,29 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter; 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Console {
     private JFrame window = null;
-
     private static Console _instance = null;
-
     private JTextField commandInput;
     private DefaultListModel<String> commandHistoryModel = new DefaultListModel<>();
     private JList<String> commandsHistory;
-
     public static Console Instance() {
         if (_instance == null) {
             _instance = new Console();
         }
         return _instance;
     }
-
-    public boolean isActive() {
-        return (window == null) ? false : true;
+    private Console(){
+        INIT_COMMANDS();
     }
-
+    public boolean isActive() {
+        return window != null;
+    }
     public void Open() {
         window = new JFrame("Console");
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -84,34 +85,58 @@ public class Console {
             }
         });
     }
-
     private String CurrentTime(){
         LocalDateTime myDateObj = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");
         return myDateObj.format(myFormatObj);
     }
+    public static void Out(String out){
+        Instance().commandHistoryModel.addElement(out);
+    }
+    private static final List<Command> AVAILABLE_COMMANDS = new ArrayList<Command>();
+    private void INIT_COMMANDS(){ //later from file
+        AVAILABLE_COMMANDS.add(new ModifyCommand("modify", "mod"));
+        AVAILABLE_COMMANDS.add(new PlayCommand("play", "pl"));
+        AVAILABLE_COMMANDS.add(new HelpCommand("help"));
+    }
+    public static void InvokeCommand(String cmd){
+        Instance().commandHistoryModel.addElement(Instance().CurrentTime() + ": >" + cmd);
+        Instance().commandsHistory.ensureIndexIsVisible(Instance().commandHistoryModel.getSize() - 1);
+        Instance().commandInput.setText("");
+        var chain = cmd.split(" ");
+        if(chain.length == 0){
+            cmd = "";
+            chain = cmd.split(" ");
+        }
+        var main_cmd = chain[0];
 
-    public void ConsoleOutput(String out){
-        commandHistoryModel.addElement(CurrentTime() + ": " + out);
+        String[] parameters = null;
+        if(chain.length > 1){
+            parameters = Arrays.copyOfRange(chain, 1, chain.length);
+        }
+
+        var command = findCommand(main_cmd);
+
+        if(command == null){
+            Console.Out(Command.DEFAULT_CMD_NOT_FOUND_MSG(main_cmd));
+            return;
+        }
+        command.invoke(parameters);
     }
 
-    public void InvokeCommand(String cmd){
-        commandHistoryModel.addElement(CurrentTime() + ": >" + cmd);
-        commandInput.setText("");
-        switch (cmd) {
-            case "ping":
-                ConsoleOutput("pong");
-                break;
-            case "modify":
-                ConsoleOutput("Now entered into modify mode!");
-                Game.Instance().set_state(new GameStateModify());
-                break;
-            case "play":
-                ConsoleOutput("Now entered into play mode!");
-                Game.Instance().set_state(new GameStatePlay());
-                break;
-            default:
-                ConsoleOutput("Command <" + cmd + "> not found...");
+    public static Command findCommand(String cmd){
+        for(var command : AVAILABLE_COMMANDS){
+            for(var alias : command.ALIASES){
+                if(cmd.equals(alias)){
+                    return command;
+                }
+            }
         }
+        return null;
+    }
+    public static Command[] GetAllAvaibleCommands(){
+        Command[] arr = new Command[AVAILABLE_COMMANDS.size()];
+        AVAILABLE_COMMANDS.toArray(arr);
+        return arr;
     }
 }
