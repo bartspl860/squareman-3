@@ -1,3 +1,4 @@
+package Game;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -63,13 +64,19 @@ public class TAdapter extends KeyAdapter implements MouseListener{
         
     }
     @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
+    public void mouseExited(MouseEvent e) {        
         
     }
     @Override
     public void mousePressed(MouseEvent e) {
-        Game.Instance().get_state().spawn_wall(Point.FromAwtPoint(e.getPoint()));
+        var buttonCode = e.getButton();
+
+        if(buttonCode == MouseEvent.BUTTON1){
+            Game.Instance().get_state().spawn_item(Point.FromAwtPoint(e.getPoint()));   
+        }
+        else if(buttonCode == MouseEvent.BUTTON3){
+            Game.Instance().get_state().remove_item(Point.FromAwtPoint(e.getPoint()));
+        }        
     }
     @Override
     public void mouseReleased(MouseEvent e) {

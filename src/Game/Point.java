@@ -1,3 +1,4 @@
+package Game;
 public class Point {
     public Integer x;
     public Integer y;
@@ -32,6 +33,10 @@ public class Point {
         int x_in_range = Math.min(Math.max(axis_x.x, this.x), axis_x.y);
         int y_in_range = Math.min(Math.max(axis_y.x, this.y), axis_y.y);
         return new Point(x_in_range, y_in_range);
+    }
+
+    public boolean Equals(Point p){        
+        return ((this.x.intValue() == p.x.intValue()) && (this.y.intValue() == p.y.intValue()));
     }
 
     public static Point FromAwtPoint(java.awt.Point p){

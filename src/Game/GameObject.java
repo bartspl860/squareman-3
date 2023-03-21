@@ -1,3 +1,4 @@
+package Game;
 public abstract class GameObject {
     private static Long InstanceCounter = 0L;
     private Long _id;

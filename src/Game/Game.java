@@ -1,3 +1,4 @@
+package Game;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.util.ArrayList;

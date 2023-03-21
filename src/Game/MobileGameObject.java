@@ -1,3 +1,4 @@
+package Game;
 public abstract class MobileGameObject extends GameObject {
 
     protected Point _direction = new Point(0, 0);
