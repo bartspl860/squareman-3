@@ -2,6 +2,9 @@ package Game;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -35,10 +38,15 @@ public class Console {
     private Console(){
         INIT_COMMANDS();
     }
-    public boolean isActive() {
-        return window != null;
+    public static boolean isActive() {
+        return Instance().window != null;
     }
-    public void Open() {
+
+    public static void Open(){
+        Instance().IOpen();
+    }
+
+    public void IOpen() {
         window = new JFrame("Console");
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.setSize(300, 250);
@@ -59,6 +67,14 @@ public class Console {
         gbc.gridx = 0;
         gbc.gridy = 2;
         commandInput = new JTextField(10);
+        commandInput.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    Console.InvokeCommand();
+                }
+            }
+        });
         mainPanel.add(commandInput, gbc);
 
         gbc.gridx = 1;
@@ -68,7 +84,7 @@ public class Console {
         submitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                InvokeCommand(commandInput.getText());
+                InvokeCommand();
             }
         });
 
@@ -78,12 +94,12 @@ public class Console {
         window.setVisible(true);
         window.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {                
+            public void windowClosing(WindowEvent e) {   
+                window.setVisible(false);             
                 window.dispose();
                 window = null;
-                System.out.println("Disposed");
             }
-        });
+        });        
     }
     private String CurrentTime(){
         LocalDateTime myDateObj = LocalDateTime.now();
@@ -100,10 +116,12 @@ public class Console {
         AVAILABLE_COMMANDS.add(new HelpCommand("help"));
         AVAILABLE_COMMANDS.add(new ObjectsCommand("objects", "objs"));
         AVAILABLE_COMMANDS.add(new ServerCommand("server"));
+        AVAILABLE_COMMANDS.add(new ClearCommand("clear", "cls"));
     }
-    public static void InvokeCommand(String cmd){
+    public static void InvokeCommand(){
+        String cmd = Instance().commandInput.getText();
         Instance().commandHistoryModel.addElement(Instance().CurrentTime() + ": >" + cmd);
-        Instance().commandsHistory.ensureIndexIsVisible(Instance().commandHistoryModel.getSize() - 1);
+        Instance().commandsHistory.ensureIndexIsVisible(Instance().commandHistoryModel.getSize());
         Instance().commandInput.setText("");
         var chain = cmd.split(" ");
         if(chain.length == 0){
@@ -140,5 +158,8 @@ public class Console {
         Command[] arr = new Command[AVAILABLE_COMMANDS.size()];
         AVAILABLE_COMMANDS.toArray(arr);
         return arr;
+    }
+    public static void Clear(){
+        Instance().commandHistoryModel.clear();
     }
 }

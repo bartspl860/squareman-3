@@ -5,6 +5,7 @@ import java.io.IOException;
 
 //Inicjalizacja okna aplikacji
 public class App extends JFrame {
+    public final static boolean WINDOWS_COMPILATION = true;
     //szerokość okna
     public final static int WIN_DIM = 640;
     private static App _instance = null;

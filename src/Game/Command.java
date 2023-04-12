@@ -123,7 +123,7 @@ final class HelpCommand extends Command {
             return;
         }
         if (parameters.length > 1) {
-            Console.Out(DEFAULT_CMD_TOO_MANY_PARAMETERS("help"));
+            Console.Out(DEFAULT_CMD_TOO_MANY_PARAMETERS(this.ALIASES.get(0)));
             return;
         }
         var command = Console.findCommand(parameters[0]);
@@ -154,7 +154,12 @@ final class ServerCommand extends Command{
     public void invoke(String[] parameters) {
         
         if (parameters == null) {
-            Console.Out(DEFAULT_CMD_NEED_PARAMETERS("server"));
+            Console.Out(DEFAULT_CMD_NEED_PARAMETERS(this.ALIASES.get(0)));
+            return;
+        }
+
+        if(parameters.length > 1){
+            Console.Out(DEFAULT_CMD_TOO_MANY_PARAMETERS(this.ALIASES.get(0)));
             return;
         }
 
@@ -185,4 +190,24 @@ final class ServerCommand extends Command{
             }
         }
     }
+}
+
+final class ClearCommand extends Command{
+
+    public ClearCommand(String... aliases){
+        super(aliases);
+        description = "Clears console window from invoked commands.";
+    }
+
+    @Override
+    public void invoke(String[] parameters) {
+        
+        if(parameters != null){
+            Console.Out(DEFAULT_CMD_TOO_MANY_PARAMETERS(this.ALIASES.get(0)));
+            return;
+        }
+
+        Console.Clear();
+    }
+
 }

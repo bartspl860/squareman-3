@@ -35,7 +35,7 @@ public class Point {
         return new Point(x_in_range, y_in_range);
     }
 
-    public boolean Equals(Point p){        
+    public boolean Equals(Point p){
         return ((this.x.intValue() == p.x.intValue()) && (this.y.intValue() == p.y.intValue()));
     }
 

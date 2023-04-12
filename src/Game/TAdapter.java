@@ -28,8 +28,8 @@ public class TAdapter extends KeyAdapter implements MouseListener{
         if(_pressed_keys.containsAll(Arrays.asList(KeyEvent.VK_SHIFT, KeyEvent.VK_T)))
         {
             _pressed_keys.clear();            
-            if(!Console.Instance().isActive()){
-                Console.Instance().Open();
+            if(!Console.isActive()){
+                Console.Open();
             }           
         }
     }

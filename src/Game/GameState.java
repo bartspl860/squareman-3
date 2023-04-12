@@ -34,10 +34,18 @@ class GameStateModify extends GameState {
 
     @Override
     protected void spawn_item(Point p) {
-        p = p.Add(0, 0);
-
+        if(App.WINDOWS_COMPILATION)
+            p = p.Add(-6, -30);
+            
         p.x = Math.round(p.x / Wall.SpawnSize) * Wall.SpawnSize;
         p.y = Math.round(p.y / Wall.SpawnSize) * Wall.SpawnSize;
+
+        final Point const_p = p;  
+        var filtered = Game.Objects
+                        .stream().filter(obj -> obj.GetPosition().Equals(const_p))
+                        .count();
+        if(filtered > 0)
+            return;
 
         Wall w = new Wall(p, Wall.SpawnSize, Wall.SpawnSize);
         Game.Objects.add(w);
@@ -45,7 +53,8 @@ class GameStateModify extends GameState {
 
     @Override
     protected void remove_item(Point p){
-        p = p.Add(0,0);
+        if(App.WINDOWS_COMPILATION)
+            p = p.Add(-6, -30);
 
         p.x = Math.round(p.x / Wall.SpawnSize) * Wall.SpawnSize;
         p.y = Math.round(p.y / Wall.SpawnSize) * Wall.SpawnSize;
