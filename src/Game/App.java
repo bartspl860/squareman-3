@@ -3,10 +3,12 @@ import javax.swing.JFrame;
 import java.awt.EventQueue;
 import java.io.IOException;
 
+//Inicjalizacja okna aplikacji
 public class App extends JFrame {
+    //szerokość okna
     public final static int WIN_DIM = 640;
     private static App _instance = null;
-
+    //singleton
     public static App Instance() {
         if (_instance == null)
             _instance = new App();
@@ -14,6 +16,7 @@ public class App extends JFrame {
     }
 
     private App() {
+        //wstrzyknięcie instancji Game(JPanel) -> App(JFrame)
         add(Game.Instance());
         setTitle("InDev");
         setSize(WIN_DIM, WIN_DIM);

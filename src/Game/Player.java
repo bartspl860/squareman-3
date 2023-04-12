@@ -10,7 +10,7 @@ public class Player extends MobileGameObject implements IColorable {
 
     private Player(Point pos, Integer wid, Integer hei, Integer speed) {
         super(pos, wid, hei, speed);
-    }
+    }    
 
     public static Player Instance() {
         if (Player._instance == null){
@@ -21,8 +21,13 @@ public class Player extends MobileGameObject implements IColorable {
     }
 
     @Override
-    public void DrawRect(Graphics2D g2d) {                
+    public void DrawRect(Graphics2D g2d) {                        
         g2d.setColor(new Color(0, 0 ,0));
+        g2d.drawString(
+            this.toString(), 
+            _position.x + _width / 2 - 75, 
+            _position.y - 10
+        );
         g2d.drawRect(
             _position.x,
             _position.y, 
@@ -39,6 +44,15 @@ public class Player extends MobileGameObject implements IColorable {
             _position.y + 1, 
             _width - 2,
             _height - 2
+        );
+    }
+
+    public static Player getPuppetPlayer(){
+        return new Player(
+            new Point(50,50), 
+            30,
+            30,
+            5
         );
     }
         

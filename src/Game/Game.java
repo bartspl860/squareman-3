@@ -24,6 +24,10 @@ public class Game extends JPanel implements ActionListener {
 
     protected Game() {
         Objects.add(Player.Instance());
+
+        //!!!!For test!!!!\\
+        Objects.add(Player.getPuppetPlayer());
+        
         new Timer(10, this).start();
     }
 

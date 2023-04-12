@@ -34,7 +34,7 @@ class GameStateModify extends GameState {
 
     @Override
     protected void spawn_item(Point p) {
-        p = p.Add(-8, -30);
+        p = p.Add(0, 0);
 
         p.x = Math.round(p.x / Wall.SpawnSize) * Wall.SpawnSize;
         p.y = Math.round(p.y / Wall.SpawnSize) * Wall.SpawnSize;
@@ -45,7 +45,7 @@ class GameStateModify extends GameState {
 
     @Override
     protected void remove_item(Point p){
-        p = p.Add(-8, -30);
+        p = p.Add(0,0);
 
         p.x = Math.round(p.x / Wall.SpawnSize) * Wall.SpawnSize;
         p.y = Math.round(p.y / Wall.SpawnSize) * Wall.SpawnSize;

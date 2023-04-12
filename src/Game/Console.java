@@ -98,6 +98,8 @@ public class Console {
         AVAILABLE_COMMANDS.add(new ModifyCommand("modify", "mod"));
         AVAILABLE_COMMANDS.add(new PlayCommand("play", "pl"));
         AVAILABLE_COMMANDS.add(new HelpCommand("help"));
+        AVAILABLE_COMMANDS.add(new ObjectsCommand("objects", "objs"));
+        AVAILABLE_COMMANDS.add(new ServerCommand("server"));
     }
     public static void InvokeCommand(String cmd){
         Instance().commandHistoryModel.addElement(Instance().CurrentTime() + ": >" + cmd);

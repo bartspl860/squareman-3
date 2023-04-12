@@ -1,61 +1,66 @@
 package Server;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Server {
-    public static void main(String args[])
-        throws Exception
-    {
-  
-        // Create server Socket
-        ServerSocket ss = new ServerSocket(6969);
-  
-        // connect it to client socket
-        Socket s = ss.accept();
-        System.out.println("Connection established");
-  
-        // to send data to the client
-        PrintStream ps
-            = new PrintStream(s.getOutputStream());
-  
-        // to read data coming from the client
-        BufferedReader br
-            = new BufferedReader(
-                new InputStreamReader(
-                    s.getInputStream()));
-  
-        // to read data from the keyboard
-        BufferedReader kb
-            = new BufferedReader(
-                new InputStreamReader(System.in));
-  
-        // server executes continuously
-        while (true) {
-  
-            String str, str1;
-  
-            // repeat as long as the client
-            // does not send a null string
-  
-            // read from client
-            while ((str = br.readLine()) != null) {
-                System.out.println(str);
-                str1 = kb.readLine();
-  
-                // send to client
-                ps.println(str1);
+public class Server implements Runnable{
+    private static Server _serverInstance;
+    public static Server Instance(){
+        if(_serverInstance == null){
+            _serverInstance = new Server();
+        }
+        return _serverInstance;
+    }
+
+    private Server(){}
+    private ServerSocket _serverSocket;
+
+    private Thread _servThread;
+    private List<Client> _clients = new ArrayList<>();
+    private boolean running = false;
+
+    public void start(){
+        _servThread = new Thread(_serverInstance);
+        _servThread.start();
+        running = true;
+    }
+
+    public void stop() throws IOException{
+        running = false;
+        _serverSocket.close();
+    }
+
+    @Override
+    public void run() {        
+        try {
+            _serverSocket = new ServerSocket(3333);
+            while (running) {
+                System.out.println("Waiting for client...");
+                Socket clientSocket = _serverSocket.accept();
+                System.out.println("Client connected!");
+
+                var connectedClient = new Client(clientSocket, _serverInstance);
+                _clients.add(connectedClient);
+                connectedClient.start();
+
+                if(Thread.interrupted()){
+                    break;
+                }
             }
-  
-            // close connection
-            ps.close();
-            br.close();
-            kb.close();
-            ss.close();
-            s.close();
-  
-            // terminate application
-            System.exit(0);
-  
-        } // end of while
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Server stopped");
+    }
+
+    public void removeClient(Client client){
+        _clients.remove(client);
+    }
+
+    public void broadcast(String message){
+        for(var client : _clients){
+            
+        }
     }
 }
