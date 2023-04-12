@@ -1,4 +1,6 @@
 package Server;
+import Game.GameObject;
+
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -58,9 +60,21 @@ public class Server implements Runnable{
         _clients.remove(client);
     }
 
-    public void broadcast(String message){
-        for(var client : _clients){
-            
+    public void broadcast(ArrayList<GameObject> gameObjects){
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(gameObjects);
+
+            for (var client : _clients) {
+                DataOutputStream dos = new DataOutputStream(client.getSocket().getOutputStream());
+                dos.writeInt(baos.size());
+                dos.write(baos.toByteArray());
+                dos.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
 }
