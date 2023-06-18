@@ -1,5 +1,7 @@
 package Game;
 
+import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -164,29 +166,40 @@ final class ServerCommand extends Command{
         }
 
         for (var param : parameters) {
-            switch(param){
-                case "run": 
+            switch (param) {
+                case "run":
                     Console.Out("Running local server at port 3333");
                     Server.Instance().start();
-                break;
+                    break;
                 case "stop":
                     Console.Out("Stopping local server");
-                    try{
+                    try {
                         Server.Instance().stop();
-                    }
-                    catch(Exception ex){
+                    } catch (Exception ex) {
                         Console.Out(ex.getMessage());
                     }
-                    
-                break;
+                    break;
                 case "c":
                 case "connect":
-                    Console.Out("NOT IMPLEMENTED");                    
-                break;
-                case "d":                    
+                    Console.Out("Connecting to the server...");
+                    Console.Out("Enter the server IP address:");
+                    String serverIP = System.console().readLine();
+                    Console.Out("Enter the server port number:");
+                    int serverPort = Integer.parseInt(System.console().readLine());
+                    try {
+                        Socket socket = new Socket(serverIP, serverPort);
+                        Client client = new Client(socket, Server.Instance());
+                        client.start();
+                        Server.Instance().addClient(client);
+                        Console.Out("Connected to the server successfully.");
+                    } catch (IOException e) {
+                        Console.Out("Failed to connect to the server. Error: " + e.getMessage());
+                    }
+                    break;
+                case "d":
                 case "disconnect":
-                    Console.Out("NOT IMPLEMENTED");                    
-                break;
+                    Console.Out("NOT IMPLEMENTED");
+                    break;
             }
         }
     }

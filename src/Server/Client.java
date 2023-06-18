@@ -28,7 +28,9 @@ public class Client extends Thread{
 					ByteArrayInputStream bais = new ByteArrayInputStream(data);
 					ObjectInputStream ois = new ObjectInputStream(bais);
 					ArrayList<GameObject> gameObjects = (ArrayList<GameObject>) ois.readObject();
-
+					for (GameObject gameObject : gameObjects) {
+                    System.out.println("Received game object: " + gameObject);
+					}
 					
 				}
 			}

@@ -44,7 +44,7 @@ public class Server implements Runnable {
     @Override
     public void run() {
         try {
-            serverSocket = new ServerSocket(3333);
+            serverSocket = new ServerSocket(6760);
             while (running) {
                 System.out.println("Waiting for clients...");
                 Socket clientSocket = serverSocket.accept();
@@ -60,7 +60,9 @@ public class Server implements Runnable {
             System.out.println("Server stopped");
         }
     }
-
+     public void addClient(Client client) {
+        clients.add(client);
+    }
     public void removeClient(Client client) {
         clients.remove(client);
     }
