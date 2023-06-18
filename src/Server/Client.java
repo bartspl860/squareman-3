@@ -29,7 +29,7 @@ public class Client extends Thread{
 					ObjectInputStream ois = new ObjectInputStream(bais);
 					ArrayList<GameObject> gameObjects = (ArrayList<GameObject>) ois.readObject();
 
-					// to cos kurwa dalej by musiało byc ale nie znalazlem poradnika (😪😓)
+					
 				}
 			}
 		} catch (IOException | ClassNotFoundException e){

@@ -1,4 +1,5 @@
 package Server;
+
 import Game.GameObject;
 
 import java.io.*;
@@ -6,67 +7,71 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server implements Runnable{
-    private static Server _serverInstance;
-    public static Server Instance(){
-        if(_serverInstance == null){
-            _serverInstance = new Server();
+public class Server implements Runnable {
+    private static Server serverInstance;
+
+    public static Server Instance() {
+        if (serverInstance == null) {
+            serverInstance = new Server();
         }
-        return _serverInstance;
+        return serverInstance;
     }
 
-    private Server(){}
-    private ServerSocket _serverSocket;
+    private Server() {
+    }
 
-    private Thread _servThread;
-    private List<Client> _clients = new ArrayList<>();
+    private ServerSocket serverSocket;
+    private Thread serverThread;
+    private List<Client> clients = new ArrayList<>();
     private boolean running = false;
 
-    public void start(){
-        _servThread = new Thread(_serverInstance);
-        _servThread.start();
+    public void start() {
+        serverThread = new Thread(serverInstance);
+        serverThread.start();
         running = true;
     }
 
-    public void stop() throws IOException{
+    public void stop() {
         running = false;
-        _serverSocket.close();
+        serverThread.interrupt();
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void run() {        
+    public void run() {
         try {
-            _serverSocket = new ServerSocket(3333);
+            serverSocket = new ServerSocket(3333);
             while (running) {
-                System.out.println("Waiting for client...");
-                Socket clientSocket = _serverSocket.accept();
-                System.out.println("Client connected!");
+                System.out.println("Waiting for clients...");
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Client connected: " + clientSocket.getInetAddress());
 
-                var connectedClient = new Client(clientSocket, _serverInstance);
-                _clients.add(connectedClient);
+                var connectedClient = new Client(clientSocket, serverInstance);
+                clients.add(connectedClient);
                 connectedClient.start();
-
-                if(Thread.interrupted()){
-                    break;
-                }
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("Server stopped");
         }
-        System.out.println("Server stopped");
     }
 
-    public void removeClient(Client client){
-        _clients.remove(client);
+    public void removeClient(Client client) {
+        clients.remove(client);
     }
 
-    public void broadcast(ArrayList<GameObject> gameObjects){
+    public void broadcast(ArrayList<GameObject> gameObjects) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(gameObjects);
 
-            for (var client : _clients) {
+            for (Client client : clients) {
                 DataOutputStream dos = new DataOutputStream(client.getSocket().getOutputStream());
                 dos.writeInt(baos.size());
                 dos.write(baos.toByteArray());
@@ -76,5 +81,7 @@ public class Server implements Runnable{
             e.printStackTrace();
         }
     }
-
+     public static void main(String[] args) {
+        Server.Instance().start();
+    }
 }
