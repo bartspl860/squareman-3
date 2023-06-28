@@ -54,14 +54,14 @@ public class Client extends Thread{
 		return _socket;
 	}
 
-	public static void main(String[] args) {
-		try {
-			Socket socket = new Socket("localhost", 6760);
+	// public static void main(String[] args) {
+	// 	try {
+	// 		Socket socket = new Socket("localhost", 6760);
 
-			Client client = new Client(socket, null);
-			client.start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	// 		Client client = new Client(socket, null);
+	// 		client.start();
+	// 	} catch (IOException e) {
+	// 		e.printStackTrace();
+	// 	}
+	// }
 }

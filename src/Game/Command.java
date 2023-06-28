@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.net.Inet4Address;
 
 import Server.Client;
 import Server.Server;
@@ -149,7 +150,7 @@ final class ServerCommand extends Command{
     public ServerCommand(String... aliases) {
         super(aliases);
         description = "Allows to start local server at port 3333";
-        POSSIBLE_PARAMS.addAll(Arrays.asList("run", "stop", "connect/c", "disconnect/d"));
+        POSSIBLE_PARAMS.addAll(Arrays.asList("connect/c", "disconnect/d"));
     }
 
     @Override
@@ -160,32 +161,19 @@ final class ServerCommand extends Command{
             return;
         }
 
-        if(parameters.length > 1){
+        if(parameters.length > 2){
             Console.Out(DEFAULT_CMD_TOO_MANY_PARAMETERS(this.ALIASES.get(0)));
             return;
         }
 
         for (var param : parameters) {
             switch (param) {
-                case "run":
-                    Console.Out("Running local server at port 3333");
-                    Server.Instance().start();
-                    break;
-                case "stop":
-                    Console.Out("Stopping local server");
-                    try {
-                        Server.Instance().stop();
-                    } catch (Exception ex) {
-                        Console.Out(ex.getMessage());
-                    }
-                    break;
                 case "c":
                 case "connect":
                     Console.Out("Connecting to the server...");
-                    Console.Out("Enter the server IP address:");
-                    String serverIP = System.console().readLine();
-                    Console.Out("Enter the server port number:");
-                    int serverPort = Integer.parseInt(System.console().readLine());
+                    var addrs = parameters[parameters.length - 1].split(":");
+                    var serverIP = addrs[0];
+                    int serverPort = Integer.parseInt(addrs[1]);
                     try {
                         Socket socket = new Socket(serverIP, serverPort);
                         Client client = new Client(socket, Server.Instance());
