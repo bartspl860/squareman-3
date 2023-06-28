@@ -20,8 +20,6 @@ public class Game extends JPanel implements ActionListener {
 
     private GameState _state = new GameStatePlay();
 
-    // private Point _cursor_position
-
     protected Game() {
         Objects.add(Player.Instance());
 

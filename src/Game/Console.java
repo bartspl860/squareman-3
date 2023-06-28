@@ -15,6 +15,9 @@ import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import Server.Server;
+
 import javax.swing.JScrollPane;
 
 import java.time.LocalDateTime;
@@ -159,6 +162,12 @@ public class Console {
         AVAILABLE_COMMANDS.toArray(arr);
         return arr;
     }
+    
+    public static void SendDataToServer(ArrayList<GameObject> gameObjects) {
+        Server.Instance().broadcast(gameObjects);
+    }
+
+    
     public static void Clear(){
         Instance().commandHistoryModel.clear();
     }

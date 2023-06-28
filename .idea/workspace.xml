@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="0420e6f4-4dd7-4633-8c0b-657f34a19b93" name="Changes" comment="">
+    <list default="true" id="0420e6f4-4dd7-4633-8c0b-657f34a19b93" name="Changes" comment="commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/ClearCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/ClearCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Command.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/HelpCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/HelpCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/ModifyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/ModifyCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/ObjectsCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/ObjectsCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/PlayCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/PlayCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/ServerCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/ServerCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Server/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Server/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +43,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Dokumenty/Repositories/squareman-3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -58,9 +72,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.Server" />
+      <module name="squareman-3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server.Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.Client" />
+      <module name="squareman-3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.Server.Client" />
+      <item itemvalue="Application.Game.App" />
+      <item itemvalue="Application.Server" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Game.App" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Server.Client" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -75,6 +123,8 @@
       <updated>1679395891898</updated>
       <workItem from="1679395893078" duration="8726000" />
       <workItem from="1681302639330" duration="4244000" />
+      <workItem from="1687941553023" duration="1443000" />
+      <workItem from="1687944271775" duration="454000" />
     </task>
     <servers />
   </component>
