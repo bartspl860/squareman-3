@@ -3,9 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="0420e6f4-4dd7-4633-8c0b-657f34a19b93" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/ClearCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/ClearCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Command.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Console$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Console$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Console$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Console$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Console$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Console$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/Console.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/Console.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/HelpCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/HelpCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/ModifyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/ModifyCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/ObjectsCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/ObjectsCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/PlayCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/PlayCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Game/ServerCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Game/ServerCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Server/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Server/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/squareman-3/Server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/squareman-3/Server/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,17 +37,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Dokumenty/Repositories/squareman-3&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/user/source/repos/squareman-3",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.Game.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="App" />
@@ -58,9 +69,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.Server" />
+      <module name="squareman-3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server.Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.Client" />
+      <module name="squareman-3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.Server.Client" />
+      <item itemvalue="Application.Game.App" />
+      <item itemvalue="Application.Server" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Game.App" />
+        <item itemvalue="Application.Server.Client" />
+        <item itemvalue="Application.Server" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -75,6 +120,7 @@
       <updated>1679395891898</updated>
       <workItem from="1679395893078" duration="8726000" />
       <workItem from="1681302639330" duration="4244000" />
+      <workItem from="1687941553023" duration="1443000" />
     </task>
     <servers />
   </component>
