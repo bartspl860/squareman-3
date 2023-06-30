@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
 public class PlayerSprite {
     private double x,y, size;
@@ -12,10 +13,9 @@ public class PlayerSprite {
         this.color = color;
     }
 
-    public void drawSprite(Graphics2D graphics2D){
-        Rectangle2D.Double square = new Rectangle2D.Double(x,y,size,size);
-        graphics2D.setColor(color);
-        graphics2D.fill(square);
+    public void drawSprite(Graphics2D g2d, BufferedImage image) {
+        g2d.setColor(color);
+        g2d.drawImage(image, (int) x, (int) y, (int) size, (int) size, null);  
     }
 
     public Rectangle getBounds() {

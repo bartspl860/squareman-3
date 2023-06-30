@@ -1,11 +1,14 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -21,12 +24,16 @@ public class PlayerFrame extends JFrame {
     private int playerID;
     private ReadFromServer readFromServer;
     private WriteToServer writeToServer;
-    private double gravity;
-    private double jumpForce;
+
     private Rectangle leftWall;
     private Rectangle rightWall;
     private Rectangle topWall;
     private Rectangle bottomWall;
+    private Rectangle centerSquare;
+
+    private BufferedImage player1Image;
+    private BufferedImage player2Image;
+    private BufferedImage centerImage;
 
     public PlayerFrame(int width, int height) {
         this.width = width;
@@ -35,8 +42,7 @@ public class PlayerFrame extends JFrame {
         down = false;
         left = false;
         right = false;
-        gravity = 0.5;
-        jumpForce = 10;
+   
     }
 
     public void setUpGUI() {
@@ -53,7 +59,14 @@ public class PlayerFrame extends JFrame {
         setUpAnimationTimer();
         setUpKeyListener();
     }
-
+    private BufferedImage loadImage(String filename) {
+        try {
+            return ImageIO.read(new File(filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public void createSprtie() {
         if (playerID == 1) {
             thisPlayer = new PlayerSprite(100, 400, 50, Color.RED);
@@ -63,6 +76,13 @@ public class PlayerFrame extends JFrame {
             anotherPlayer = new PlayerSprite(100, 400, 50, Color.RED);
         }
 
+        int squareSize = 130;
+        int centerX = width / 2 - squareSize / 2;
+        int centerY = height / 2 - squareSize / 2;
+        player1Image = loadImage("1.png");
+        player2Image = loadImage("2.png");
+        centerImage = loadImage("3.png");
+        centerSquare = new Rectangle(centerX, centerY, squareSize, squareSize);
         leftWall = new Rectangle(0, 0, 10, height);
         rightWall = new Rectangle(width - 10, 0, 10, height);
         topWall = new Rectangle(0, 0, width, 10);
@@ -116,7 +136,13 @@ public class PlayerFrame extends JFrame {
                     displayCollisionMessage(playerID, "bottom wall");
                 }
 
-            
+                if (newBounds.intersects(centerSquare)) {
+                    displayCollisionMessage(playerID, "center square");
+                } else {
+                    thisPlayer.setX(newX);
+                    thisPlayer.setY(newY);
+                }
+
                 if (newX < 0) {
                     newX = 0;
                 } else if (newX > width - thisPlayer.getSize()) {
@@ -128,7 +154,6 @@ public class PlayerFrame extends JFrame {
                     newY = height - thisPlayer.getSize();
                 }
 
-                // z graczem
                 Rectangle anotherBounds = anotherPlayer.getBounds();
                 if (newBounds.intersects(anotherBounds)) {
                     displayCollisionMessage(playerID, "another player");
@@ -216,13 +241,16 @@ public class PlayerFrame extends JFrame {
     private class DrawingComponent extends JComponent {
         protected void paintComponent(Graphics g) {
             Graphics2D graphics2D = (Graphics2D) g;
+            
             graphics2D.setColor(Color.GRAY);
             graphics2D.fill(leftWall);
             graphics2D.fill(rightWall);
             graphics2D.fill(topWall);
             graphics2D.fill(bottomWall);
-            anotherPlayer.drawSprite(graphics2D);
-            thisPlayer.drawSprite(graphics2D);
+            graphics2D.setColor(Color.GREEN);
+            graphics2D.drawImage(centerImage, centerSquare.x, centerSquare.y, centerSquare.width, centerSquare.height, null);
+            anotherPlayer.drawSprite(graphics2D, player2Image);
+            thisPlayer.drawSprite(graphics2D, player1Image);
         }
     }
 
