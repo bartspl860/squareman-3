@@ -35,6 +35,9 @@ public class PlayerFrame extends JFrame {
     private BufferedImage player2Image;
     private BufferedImage centerImage;
 
+    private int collisionCount;
+    private int collisionLimit;
+
     public PlayerFrame(int width, int height) {
         this.width = width;
         this.height = height;
@@ -42,14 +45,16 @@ public class PlayerFrame extends JFrame {
         down = false;
         left = false;
         right = false;
-   
+        collisionCount = 0;
+        collisionCount = 0;
+        collisionLimit = 5; // Ustawienie limitu kolizji na 5
     }
 
     public void setUpGUI() {
         contentPane = this.getContentPane();
         this.setTitle("Player #" + playerID);
         contentPane.setPreferredSize(new Dimension(width, height));
-        createSprtie();
+        createSprite();
         drawingComponent = new DrawingComponent();
         contentPane.add(drawingComponent);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +64,7 @@ public class PlayerFrame extends JFrame {
         setUpAnimationTimer();
         setUpKeyListener();
     }
+
     private BufferedImage loadImage(String filename) {
         try {
             return ImageIO.read(new File(filename));
@@ -67,7 +73,8 @@ public class PlayerFrame extends JFrame {
             return null;
         }
     }
-    public void createSprtie() {
+
+    public void createSprite() {
         if (playerID == 1) {
             thisPlayer = new PlayerSprite(100, 400, 50, Color.RED);
             anotherPlayer = new PlayerSprite(490, 400, 50, Color.BLUE);
@@ -111,33 +118,38 @@ public class PlayerFrame extends JFrame {
                 }
                 Rectangle newBounds = new Rectangle((int) newX, (int) newY, (int) thisPlayer.getSize(), (int) thisPlayer.getSize());
 
-               //Tutaj kolizje jak chcesz to dorób michał jakies
-               //lewa
+                //Tutaj kolizje jak chcesz to dorób michał jakies
+                //lewa
                 if (newBounds.intersects(leftWall)) {
                     newX = leftWall.getMaxX();
-                    displayCollisionMessage(playerID, "left wall");
+                    
+                    collisionCount++;
                 }
 
                 // prawa
                 if (newBounds.intersects(rightWall)) {
                     newX = rightWall.getX() - thisPlayer.getSize();
-                    displayCollisionMessage(playerID, "right wall");
+                    
+                    collisionCount++;
                 }
 
                 //gora
                 if (newBounds.intersects(topWall)) {
                     newY = topWall.getMaxY();
-                    displayCollisionMessage(playerID, "top wall");
+                   
+                    collisionCount++;
                 }
 
                 //dol
                 if (newBounds.intersects(bottomWall)) {
                     newY = bottomWall.getY() - thisPlayer.getSize();
-                    displayCollisionMessage(playerID, "bottom wall");
+                  
+                    collisionCount++;
                 }
 
                 if (newBounds.intersects(centerSquare)) {
-                    displayCollisionMessage(playerID, "center square");
+                   
+                    collisionCount++;
                 } else {
                     thisPlayer.setX(newX);
                     thisPlayer.setY(newY);
@@ -156,10 +168,15 @@ public class PlayerFrame extends JFrame {
 
                 Rectangle anotherBounds = anotherPlayer.getBounds();
                 if (newBounds.intersects(anotherBounds)) {
-                    displayCollisionMessage(playerID, "another player");
+                    
+                    collisionCount++;
                 } else {
                     thisPlayer.setX(newX);
                     thisPlayer.setY(newY);
+                }
+
+               if (collisionCount >= collisionLimit) {
+                endGame();
                 }
 
                 drawingComponent.repaint();
@@ -237,6 +254,18 @@ public class PlayerFrame extends JFrame {
             System.out.println("IOException from connectToServer()");
         }
     }
+
+    private void endGame() {
+    if (collisionCount > collisionLimit) {
+        String message = "Player #" + playerID + " reached the collision limit. Game over!";
+        JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        int option = JOptionPane.showOptionDialog(this, "Click OK to close the application", "Message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        if (option == JOptionPane.OK_OPTION) {
+            System.exit(0);
+        }
+    }
+}
+
 
     private class DrawingComponent extends JComponent {
         protected void paintComponent(Graphics g) {
@@ -327,14 +356,9 @@ public class PlayerFrame extends JFrame {
         });
     }
 
-  private void displayCollisionMessage(int playerID, String collisionObject) {
-    String message = "Player #" + playerID + " collided with " + collisionObject;
-    JOptionPane.showMessageDialog(this, message, "Collision", JOptionPane.INFORMATION_MESSAGE);
-    int option = JOptionPane.showOptionDialog(this, "Click OK to close the application", "Message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-    if (option == JOptionPane.OK_OPTION) {
-        System.exit(0);
-    }}
-    
-    
+ 
 }
+    
+    
+
 
