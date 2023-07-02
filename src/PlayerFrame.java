@@ -39,6 +39,7 @@ public class PlayerFrame extends JFrame {
     private int collisionLimit;
     private boolean alreadyColliding = true;
 
+
     public PlayerFrame(int width, int height) {
         this.width = width;
         this.height = height;
@@ -118,6 +119,19 @@ public class PlayerFrame extends JFrame {
                     newX += speed;
                 }
                 Rectangle newBounds = new Rectangle((int) newX, (int) newY, (int) thisPlayer.getSize(), (int) thisPlayer.getSize());
+                Rectangle anotherBounds = anotherPlayer.getBounds();
+
+                if (newBounds.intersects(anotherBounds)) {
+                    newX = thisPlayer.getX();  // Przywróć poprzednie położenie gracza
+                    newY = thisPlayer.getY();  // Przywróć poprzednie położenie gracza
+                    if(!alreadyColliding) {
+                        collisionCount++;
+                        alreadyColliding = true;
+                    }
+                } else {
+                    thisPlayer.setX(newX);
+                    thisPlayer.setY(newY);
+                }
 
                 //Tutaj kolizje jak chcesz to dorób michał jakies
                 //lewa
@@ -181,18 +195,6 @@ public class PlayerFrame extends JFrame {
                     newY = 0;
                 } else if (newY > height - thisPlayer.getSize()) {
                     newY = height - thisPlayer.getSize();
-                }
-
-                Rectangle anotherBounds = anotherPlayer.getBounds();
-                if (newBounds.intersects(anotherBounds)) {
-
-                    if(!alreadyColliding) {
-                        collisionCount++;
-                        alreadyColliding = true;
-                    }
-                } else {
-                    thisPlayer.setX(newX);
-                    thisPlayer.setY(newY);
                 }
 
                if (collisionCount >= collisionLimit) {
@@ -380,7 +382,7 @@ public class PlayerFrame extends JFrame {
         });
     }
 
- 
+
 }
     
     
