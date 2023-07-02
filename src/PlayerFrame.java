@@ -37,6 +37,7 @@ public class PlayerFrame extends JFrame {
 
     private int collisionCount;
     private int collisionLimit;
+    private boolean alreadyColliding = true;
 
     public PlayerFrame(int width, int height) {
         this.width = width;
@@ -122,34 +123,50 @@ public class PlayerFrame extends JFrame {
                 //lewa
                 if (newBounds.intersects(leftWall)) {
                     newX = leftWall.getMaxX();
-                    
-                    collisionCount++;
+
+                    if(!alreadyColliding) {
+                        collisionCount++;
+                        alreadyColliding = true;
+                    }
+
                 }
 
                 // prawa
                 if (newBounds.intersects(rightWall)) {
                     newX = rightWall.getX() - thisPlayer.getSize();
-                    
-                    collisionCount++;
+
+                    if(!alreadyColliding) {
+                        collisionCount++;
+                        alreadyColliding = true;
+                    }
                 }
 
                 //gora
                 if (newBounds.intersects(topWall)) {
                     newY = topWall.getMaxY();
-                   
-                    collisionCount++;
+
+                    if(!alreadyColliding) {
+                        collisionCount++;
+                        alreadyColliding = true;
+                    }
                 }
 
                 //dol
                 if (newBounds.intersects(bottomWall)) {
                     newY = bottomWall.getY() - thisPlayer.getSize();
-                  
-                    collisionCount++;
+
+                    if(!alreadyColliding) {
+                        collisionCount++;
+                        alreadyColliding = true;
+                    }
                 }
 
                 if (newBounds.intersects(centerSquare)) {
-                   
-                    collisionCount++;
+
+                    if(!alreadyColliding) {
+                        collisionCount++;
+                        alreadyColliding = true;
+                    }
                 } else {
                     thisPlayer.setX(newX);
                     thisPlayer.setY(newY);
@@ -168,8 +185,11 @@ public class PlayerFrame extends JFrame {
 
                 Rectangle anotherBounds = anotherPlayer.getBounds();
                 if (newBounds.intersects(anotherBounds)) {
-                    
-                    collisionCount++;
+
+                    if(!alreadyColliding) {
+                        collisionCount++;
+                        alreadyColliding = true;
+                    }
                 } else {
                     thisPlayer.setX(newX);
                     thisPlayer.setY(newY);
@@ -220,15 +240,19 @@ public class PlayerFrame extends JFrame {
                 switch (keyCode) {
                     case KeyEvent.VK_UP:
                         up = false;
+                        alreadyColliding = false;
                         break;
                     case KeyEvent.VK_DOWN:
                         down = false;
+                        alreadyColliding = false;
                         break;
                     case KeyEvent.VK_LEFT:
                         left = false;
+                        alreadyColliding = false;
                         break;
                     case KeyEvent.VK_RIGHT:
                         right = false;
+                        alreadyColliding = false;
                         break;
                 }
             }
