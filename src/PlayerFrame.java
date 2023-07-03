@@ -152,7 +152,6 @@ public class PlayerFrame extends JFrame {
                     thisPlayer.setY(newY);
                 }
 
-                // Tutaj kolizje jak chcesz to dorób michał jakies
                 // lewa
                 if (newBounds.intersects(leftWall)) {
                     newX = leftWall.getMaxX();

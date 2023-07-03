@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="06317dbf-11eb-4356-b7b3-22a12213098e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$DrawingComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$DrawingComponent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$ReadFromServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$ReadFromServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$WriteToServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$WriteToServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/Server$ReadFromClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/Server$ReadFromClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/Server$WriteToClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/Server$WriteToClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PlayerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
