@@ -38,6 +38,7 @@ public class PlayerFrame extends JFrame {
     private int collisionCount;
     private int collisionLimit;
     private boolean alreadyColliding = true;
+    private JLabel collisionCountLabel;
 
     public PlayerFrame(int width, int height) {
         this.width = width;
@@ -61,8 +62,15 @@ public class PlayerFrame extends JFrame {
         this.pack();
         this.setVisible(true);
 
+        collisionCountLabel = new JLabel("Collision Count: ");
+        collisionCountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        collisionCountLabel.setVerticalAlignment(SwingConstants.TOP);
+        add(collisionCountLabel, BorderLayout.NORTH);
+
         setUpAnimationTimer();
         setUpKeyListener();
+
+
     }
 
     private BufferedImage loadImage(String filename) {
@@ -214,6 +222,7 @@ public class PlayerFrame extends JFrame {
                 if (collisionCount >= collisionLimit) {
                     endGame();
                 }
+                collisionCountLabel.setText("Collision Count: " + (collisionLimit - collisionCount));
 
                 drawingComponent.repaint();
             }

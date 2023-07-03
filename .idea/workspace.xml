@@ -9,6 +9,9 @@
       <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$ReadFromServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$ReadFromServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$WriteToServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame$WriteToServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/PlayerFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/Server$ReadFromClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/Server$ReadFromClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/Server$WriteToClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/Server$WriteToClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SquareTest/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SquareTest/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PlayerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
