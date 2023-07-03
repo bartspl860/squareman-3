@@ -39,7 +39,6 @@ public class PlayerFrame extends JFrame {
     private int collisionLimit;
     private boolean alreadyColliding = true;
 
-
     public PlayerFrame(int width, int height) {
         this.width = width;
         this.height = height;
@@ -48,8 +47,7 @@ public class PlayerFrame extends JFrame {
         left = false;
         right = false;
         collisionCount = 0;
-        collisionCount = 0;
-        collisionLimit = 5; // Ustawienie limitu kolizji na 5
+        collisionLimit = 4; // Ustawienie limitu kolizji na 5
     }
 
     public void setUpGUI() {
@@ -100,7 +98,7 @@ public class PlayerFrame extends JFrame {
 
     private void setUpAnimationTimer() {
         int interval = 10;
-        final double[] verticalVelocity = {0};
+        final double[] verticalVelocity = { 0 };
         ActionListener al = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,27 +116,40 @@ public class PlayerFrame extends JFrame {
                 } else if (right) {
                     newX += speed;
                 }
-                Rectangle newBounds = new Rectangle((int) newX, (int) newY, (int) thisPlayer.getSize(), (int) thisPlayer.getSize());
+                Rectangle newBounds = new Rectangle((int) newX, (int) newY, (int) thisPlayer.getSize(),
+                        (int) thisPlayer.getSize());
                 Rectangle anotherBounds = anotherPlayer.getBounds();
 
                 if (newBounds.intersects(anotherBounds)) {
-                    newX = thisPlayer.getX();  // Przywróć poprzednie położenie gracza
-                    newY = thisPlayer.getY();  // Przywróć poprzednie położenie gracza
-                    if(!alreadyColliding) {
+                    if (!alreadyColliding) {
                         collisionCount++;
                         alreadyColliding = true;
+
+                        double newPlayerX = Math.random() * (width - thisPlayer.getSize());
+                        double newPlayerY = Math.random() * (height - thisPlayer.getSize());
+
+                        Rectangle newPlayerBounds = new Rectangle((int) newPlayerX, (int) newPlayerY,
+                                (int) thisPlayer.getSize(), (int) thisPlayer.getSize());
+                        if (newPlayerBounds.intersects(anotherBounds)) {
+
+                            newPlayerX = Math.random() * (width - thisPlayer.getSize());
+                            newPlayerY = Math.random() * (height - thisPlayer.getSize());
+                        }
+
+                        newX = newPlayerX;
+                        newY = newPlayerY;
                     }
                 } else {
                     thisPlayer.setX(newX);
                     thisPlayer.setY(newY);
                 }
 
-                //Tutaj kolizje jak chcesz to dorób michał jakies
-                //lewa
+                // Tutaj kolizje jak chcesz to dorób michał jakies
+                // lewa
                 if (newBounds.intersects(leftWall)) {
                     newX = leftWall.getMaxX();
 
-                    if(!alreadyColliding) {
+                    if (!alreadyColliding) {
                         collisionCount++;
                         alreadyColliding = true;
                     }
@@ -149,27 +160,27 @@ public class PlayerFrame extends JFrame {
                 if (newBounds.intersects(rightWall)) {
                     newX = rightWall.getX() - thisPlayer.getSize();
 
-                    if(!alreadyColliding) {
+                    if (!alreadyColliding) {
                         collisionCount++;
                         alreadyColliding = true;
                     }
                 }
 
-                //gora
+                // gora
                 if (newBounds.intersects(topWall)) {
                     newY = topWall.getMaxY();
 
-                    if(!alreadyColliding) {
+                    if (!alreadyColliding) {
                         collisionCount++;
                         alreadyColliding = true;
                     }
                 }
 
-                //dol
+                // dol
                 if (newBounds.intersects(bottomWall)) {
                     newY = bottomWall.getY() - thisPlayer.getSize();
 
-                    if(!alreadyColliding) {
+                    if (!alreadyColliding) {
                         collisionCount++;
                         alreadyColliding = true;
                     }
@@ -177,9 +188,12 @@ public class PlayerFrame extends JFrame {
 
                 if (newBounds.intersects(centerSquare)) {
 
-                    if(!alreadyColliding) {
+                    if (!alreadyColliding) {
                         collisionCount++;
                         alreadyColliding = true;
+                        Lava();
+                       
+
                     }
                 } else {
                     thisPlayer.setX(newX);
@@ -197,8 +211,8 @@ public class PlayerFrame extends JFrame {
                     newY = height - thisPlayer.getSize();
                 }
 
-               if (collisionCount >= collisionLimit) {
-                endGame();
+                if (collisionCount >= collisionLimit) {
+                    endGame();
                 }
 
                 drawingComponent.repaint();
@@ -282,28 +296,40 @@ public class PlayerFrame extends JFrame {
     }
 
     private void endGame() {
-    if (collisionCount > collisionLimit) {
-        String message = "Player #" + playerID + " reached the collision limit. Game over!";
-        JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
-        int option = JOptionPane.showOptionDialog(this, "Click OK to close the application", "Message", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-        if (option == JOptionPane.OK_OPTION) {
-            System.exit(0);
+        if (collisionCount > collisionLimit) {
+            String message = "Player #" + playerID + " Won!";
+            JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            int option = JOptionPane.showOptionDialog(this, "Click OK to close the application", "Message",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+            if (option == JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
         }
     }
-}
-
+      private void Lava() {
+        
+            String message = "You tried hard, but you lost your life in lava";
+            JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            int option = JOptionPane.showOptionDialog(this, "Click OK to close the application", "Message",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+            if (option == JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
+        
+    }
 
     private class DrawingComponent extends JComponent {
         protected void paintComponent(Graphics g) {
             Graphics2D graphics2D = (Graphics2D) g;
-            
+
             graphics2D.setColor(Color.GRAY);
             graphics2D.fill(leftWall);
             graphics2D.fill(rightWall);
             graphics2D.fill(topWall);
             graphics2D.fill(bottomWall);
             graphics2D.setColor(Color.GREEN);
-            graphics2D.drawImage(centerImage, centerSquare.x, centerSquare.y, centerSquare.width, centerSquare.height, null);
+            graphics2D.drawImage(centerImage, centerSquare.x, centerSquare.y, centerSquare.width, centerSquare.height,
+                    null);
             anotherPlayer.drawSprite(graphics2D, player2Image);
             thisPlayer.drawSprite(graphics2D, player1Image);
         }
@@ -382,9 +408,4 @@ public class PlayerFrame extends JFrame {
         });
     }
 
-
 }
-    
-    
-
-
